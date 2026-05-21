@@ -1,0 +1,12 @@
+{
+    "name": "Session Summary on Agent Stop",
+    "version": "1.0.0",
+    "description": "Ao final de cada sessão do agente, gera automaticamente um sumário estruturado do que foi feito, decisões tomadas e próximos passos pendentes.",
+    "when": {
+        "type": "agentStop"
+    },
+    "then": {
+        "type": "askAgent",
+        "prompt": "A sessão está encerrando. Gere um sumário estruturado no seguinte formato:\n\n## 📋 Sumário da Sessão\n\n### ✅ O que foi feito\n[Lista dos arquivos criados/modificados e o que cada um faz]\n\n### 🧠 Decisões tomadas\n[Decisões técnicas ou de design relevantes e suas justificativas]\n\n### ⚠️ Pontos de atenção\n[Qualquer coisa incompleta, risco identificado ou dívida técnica gerada]\n\n### 🔜 Próximos passos sugeridos\n[Lista priorizada do que deve ser feito na próxima sessão]\n\nSeja conciso — máximo 20 linhas no total."
+    }
+}

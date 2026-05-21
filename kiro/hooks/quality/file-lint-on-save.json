@@ -1,0 +1,18 @@
+{
+    "name": "Lint & Type Check on Save",
+    "version": "1.0.0",
+    "description": "Ao salvar arquivos TypeScript ou JavaScript, verifica automaticamente erros de lint e tipagem, sinalizando problemas antes que se acumulem.",
+    "when": {
+        "type": "fileEdited",
+        "patterns": [
+            "*.ts",
+            "*.tsx",
+            "*.js",
+            "*.jsx"
+        ]
+    },
+    "then": {
+        "type": "askAgent",
+        "prompt": "Um arquivo foi salvo. Verifique rapidamente:\n\n1. Há erros de TypeScript no arquivo salvo? (tipos incorretos, imports faltando)\n2. Há violações de ESLint óbvias? (any sem justificativa, console.log esquecido, variáveis não usadas)\n3. Há alguma hard rule violada? (secret hardcoded, error handling ausente)\n\nSe houver problemas: liste-os de forma concisa com a linha e a correção sugerida.\nSe estiver tudo OK: não precisa responder — apenas continue."
+    }
+}

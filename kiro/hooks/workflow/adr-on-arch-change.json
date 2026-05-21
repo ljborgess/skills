@@ -1,0 +1,28 @@
+{
+    "name": "ADR on Architecture Change",
+    "version": "1.0.0",
+    "description": "Detecta mudanças em arquivos de configuração arquitetural (docker, infra, CI/CD, configs principais) e solicita criação de ADR documentando a decisão tomada.",
+    "when": {
+        "type": "fileEdited",
+        "patterns": [
+            "docker-compose*.yml",
+            "Dockerfile*",
+            "*.config.ts",
+            "*.config.js",
+            "*.config.mjs",
+            "terraform/**",
+            "infra/**",
+            ".github/workflows/**",
+            "k8s/**",
+            "helm/**",
+            "nginx.conf",
+            "vite.config.*",
+            "webpack.config.*",
+            "tsconfig.json"
+        ]
+    },
+    "then": {
+        "type": "askAgent",
+        "prompt": "Um arquivo de configuração arquitetural foi modificado. Avalie se esta mudança requer um ADR (Architecture Decision Record):\n\n**Critérios para criar ADR:**\n- A mudança afeta como o sistema é construído, deployado ou executado?\n- A mudança tem trade-offs que o time precisa entender?\n- A mudança seria difícil de reverter?\n- Um novo dev ficaria confuso sem contexto sobre esta decisão?\n\nSe SIM para qualquer critério:\n1. Crie o arquivo `docs/adr/ADR-[próximo-número]-[título-kebab-case].md`\n2. Use o template do agente architect.md\n3. Documente: contexto, decisão, alternativas consideradas e consequências\n\nSe NÃO (mudança trivial/rotineira): apenas confirme que não é necessário ADR e explique por quê."
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "name": "Performance Budget Guard",
+    "version": "1.0.0",
+    "description": "Após tarefas que envolvem frontend ou queries de banco, verifica se as mudanças respeitam o performance budget definido — bundle size, complexidade de queries e métricas Core Web Vitals.",
+    "when": {
+        "type": "postTaskExecution"
+    },
+    "then": {
+        "type": "askAgent",
+        "prompt": "Uma tarefa foi concluída. Se ela envolveu código frontend ou queries de banco de dados, verifique o performance budget:\n\n**Frontend — verifique se:**\n- Foram adicionadas novas dependências pesadas? (> 50kb gzipped)\n- Há imports que poderiam ser lazy loaded?\n- Imagens novas têm dimensões definidas e formato otimizado (WebP/AVIF)?\n- Componentes novos têm re-renders desnecessários? (funções inline em props, objetos criados no render)\n- Há operações síncronas pesadas no thread principal?\n\n**Backend/Banco — verifique se:**\n- Queries novas têm índices adequados?\n- Há risco de N+1 nas queries adicionadas?\n- Operações em loop que poderiam ser batch?\n- Chamadas externas síncronas que poderiam ser paralelas (Promise.all)?\n\n**Performance Budget:**\n- Bundle JS total: < 500kb gzipped\n- Nenhuma query sem índice em tabelas > 10k registros\n- Nenhum loop com query dentro\n\nSe houver violação: sinalize com ⚠️ e sugira a otimização.\nSe não for tarefa de frontend/banco: ✅ Performance budget não aplicável a esta tarefa."
+    }
+}

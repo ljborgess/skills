@@ -1,0 +1,21 @@
+{
+    "name": "Dependency Security Audit",
+    "version": "1.0.0",
+    "description": "Ao modificar arquivos de dependências, audita CVEs, licenças problemáticas e versões desatualizadas.",
+    "when": {
+        "type": "fileEdited",
+        "patterns": [
+            "package.json",
+            "package-lock.json",
+            "requirements*.txt",
+            "Pipfile",
+            "pyproject.toml",
+            "pom.xml",
+            "build.gradle"
+        ]
+    },
+    "then": {
+        "type": "askAgent",
+        "prompt": "Um arquivo de dependências foi modificado. Audite:\n\n1. CVEs: dependências adicionadas/alteradas têm vulnerabilidades conhecidas?\n2. Licenças: licenças compatíveis com o projeto? (evite GPL em projetos proprietários)\n3. Manutenção: dependências têm manutenção ativa? (último release recente)\n4. Versão pinada: versões estão fixas sem ^ ou ~ em dependências críticas?\n\nSe encontrar problema crítico: sinalize com ⛔ e explique o risco.\nSe tudo OK: ✅ Dependências auditadas."
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "name": "Post-Task Test Runner",
+    "version": "1.0.0",
+    "description": "Após conclusão de qualquer tarefa de spec, executa testes e valida que nenhuma regressão foi introduzida.",
+    "when": {
+        "type": "postTaskExecution"
+    },
+    "then": {
+        "type": "askAgent",
+        "prompt": "A tarefa foi marcada como concluída. Execute a validação pós-tarefa:\n\n1. Identifique os arquivos modificados nesta tarefa\n2. Execute os testes relacionados aos arquivos modificados\n3. Verifique erros de TypeScript/lint nos arquivos alterados\n4. Confirme que o comportamento esperado está funcionando\n\nSe os testes passarem: ✅ Pós-validação OK.\nSe houver falhas: liste os erros e corrija antes de considerar a tarefa concluída."
+    }
+}

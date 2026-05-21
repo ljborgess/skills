@@ -1,0 +1,12 @@
+{
+    "name": "Dead Code Detector",
+    "version": "1.0.0",
+    "description": "Ao fim de cada sessão do agente, analisa o código produzido e identifica funções, variáveis, imports e exports que foram criados mas não têm referências — dead code que aumenta a complexidade sem valor.",
+    "when": {
+        "type": "agentStop"
+    },
+    "then": {
+        "type": "askAgent",
+        "prompt": "A sessão está encerrando. Faça uma varredura rápida de dead code nos arquivos modificados nesta sessão:\n\n1. **Imports não utilizados**: Há imports que foram adicionados mas não são referenciados no arquivo?\n2. **Funções não chamadas**: Há funções criadas que não são chamadas em nenhum lugar?\n3. **Variáveis não usadas**: Há variáveis declaradas mas nunca lidas?\n4. **Exports sem consumidores**: Há exports que não são importados em nenhum outro arquivo do projeto?\n5. **Código comentado**: Há blocos de código comentados que deveriam ser removidos?\n\nPara cada item encontrado:\n- Informe o arquivo e linha\n- Classifique: pode remover com segurança / verificar antes de remover\n\nSe não houver dead code: ✅ Nenhum dead code detectado.\nSe houver: liste de forma concisa e pergunte se deve remover agora."
+    }
+}

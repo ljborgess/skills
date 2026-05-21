@@ -1,0 +1,15 @@
+{
+    "name": "Test Coverage Enforcer",
+    "version": "1.0.0",
+    "description": "Após criar ou editar arquivos de código fonte, verifica se existe arquivo de teste correspondente e se novos casos estão cobertos.",
+    "when": {
+        "type": "postToolUse",
+        "toolTypes": [
+            "write"
+        ]
+    },
+    "then": {
+        "type": "askAgent",
+        "prompt": "Um arquivo de código foi criado ou modificado. Verifique cobertura de testes:\n\n1. Existe arquivo de teste correspondente? (ex: user.service.ts → user.service.test.ts)\n2. Novas funções ou branches têm testes cobrindo: happy path, casos de erro, edge cases?\n3. Testes existentes ainda refletem o comportamento atual?\n\nSe faltar cobertura importante: liste o que está faltando e ofereça criar os testes.\nSe for arquivo de config, tipo ou constante: ✅ não precisa de teste.\nSe cobertura estiver OK: não responda."
+    }
+}

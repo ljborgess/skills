@@ -1,0 +1,18 @@
+{
+    "name": "Env Var Documentation Enforcer",
+    "version": "1.0.0",
+    "description": "Ao editar arquivos .env.example ou de configuração de ambiente, garante que todas as variáveis estão documentadas com descrição, tipo, se é obrigatória e valor de exemplo.",
+    "when": {
+        "type": "fileEdited",
+        "patterns": [
+            ".env.example",
+            ".env.template",
+            ".env.sample",
+            "env.example"
+        ]
+    },
+    "then": {
+        "type": "askAgent",
+        "prompt": "Um arquivo de template de variáveis de ambiente foi modificado. Valide a qualidade da documentação:\n\n**Padrão esperado para cada variável:**\n```\n# [Descrição clara do que a variável faz]\n# Tipo: string | number | boolean | url | enum(val1,val2)\n# Obrigatória: sim | não (padrão: valor_padrão)\n# Exemplo: valor_de_exemplo_não_real\nNOME_DA_VARIAVEL=\n```\n\n**Verificações:**\n1. Toda variável tem comentário descritivo?\n2. O tipo está documentado?\n3. Está indicado se é obrigatória?\n4. Há um valor de exemplo (não real, não secret)?\n5. Variáveis de secret têm aviso explícito de não commitar o valor real?\n6. Variáveis novas foram adicionadas ao README na tabela de env vars?\n\nSe faltar documentação: adicione os comentários faltantes seguindo o padrão.\nSe estiver completo: ✅ Variáveis de ambiente documentadas corretamente."
+    }
+}

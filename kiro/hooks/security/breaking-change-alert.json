@@ -1,0 +1,15 @@
+{
+    "name": "Breaking Change Alert",
+    "version": "1.0.0",
+    "description": "Antes de escrever em arquivos que definem contratos públicos, detecta se a mudança é um breaking change.",
+    "when": {
+        "type": "preToolUse",
+        "toolTypes": [
+            "write"
+        ]
+    },
+    "then": {
+        "type": "askAgent",
+        "prompt": "Uma operação de escrita está prestes a ocorrer. Se o arquivo define contratos públicos (interfaces TypeScript, tipos exportados, rotas de API, schemas de banco, eventos), verifique:\n\nÉ breaking change se:\n- Remove campo obrigatório de interface/tipo\n- Muda tipo de campo existente\n- Renomeia campo sem alias de compatibilidade\n- Remove endpoint de API\n- Muda assinatura de função exportada\n\nSe for breaking change: ⚠️ ALERTE, identifique consumidores afetados e exija estratégia de migração.\nSe NÃO for breaking change: prossiga sem comentários."
+    }
+}

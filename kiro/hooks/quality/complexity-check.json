@@ -1,0 +1,19 @@
+{
+    "name": "Complexity Check on Save",
+    "version": "1.0.0",
+    "description": "Ao salvar arquivos de código, verifica se alguma função ultrapassou o limite de complexidade ciclomática ou tamanho definido.",
+    "when": {
+        "type": "fileEdited",
+        "patterns": [
+            "*.ts",
+            "*.tsx",
+            "*.js",
+            "*.jsx",
+            "*.py"
+        ]
+    },
+    "then": {
+        "type": "askAgent",
+        "prompt": "Um arquivo foi salvo. Verifique rapidamente se alguma função no arquivo viola os limites de complexidade:\n\n- Complexidade ciclomática > 10 por função\n- Função com mais de 30 linhas\n- Aninhamento com profundidade > 3\n- Mais de 3 parâmetros em uma função\n\nSe houver violação: informe o nome da função, a métrica violada e sugira como decompor.\nSe estiver dentro dos limites: não responda — continue sem comentários."
+    }
+}

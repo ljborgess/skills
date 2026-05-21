@@ -1,0 +1,12 @@
+{
+    "name": "Pre-Task Requirements Validator",
+    "version": "1.0.0",
+    "description": "Antes de iniciar qualquer tarefa de spec, valida se os requisitos estão claros e o escopo está definido.",
+    "when": {
+        "type": "preTaskExecution"
+    },
+    "then": {
+        "type": "askAgent",
+        "prompt": "Antes de iniciar esta tarefa, valide:\n\n1. O objetivo está inequivocamente definido?\n2. Os limites do que deve e não deve ser feito estão claros?\n3. Todas as dependências necessárias estão disponíveis?\n4. Como saberemos que a tarefa está completa?\n\nSe qualquer item estiver ambíguo: PARE e sinalize antes de prosseguir.\nSe tudo estiver claro: ✅ Pré-validação OK — iniciando."
+    }
+}

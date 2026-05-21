@@ -1,0 +1,15 @@
+{
+    "name": "Conventional Commit Validator",
+    "version": "1.0.0",
+    "description": "Antes de executar comandos git commit, valida se a mensagem segue o padrão Conventional Commits e bloqueia commits com mensagens inadequadas.",
+    "when": {
+        "type": "preToolUse",
+        "toolTypes": [
+            "shell"
+        ]
+    },
+    "then": {
+        "type": "askAgent",
+        "prompt": "Um comando shell está prestes a ser executado. Se for um comando `git commit`, valide a mensagem de commit:\n\n**Formato válido (Conventional Commits):**\n```\n<type>(<scope>): <subject>\n\ntype: feat | fix | refactor | test | docs | chore | perf | ci | revert\nscope: módulo afetado (opcional, entre parênteses)\nsubject: imperativo, lowercase, sem ponto final, máximo 72 caracteres\n```\n\n**Exemplos válidos:**\n- `feat(auth): add JWT refresh token rotation`\n- `fix(orders): prevent duplicate order on retry`\n- `refactor: extract validation to separate module`\n- `docs: update API authentication guide`\n\n**Exemplos inválidos:**\n- `update stuff` → sem tipo\n- `Fix bug` → capitalizado, sem tipo\n- `feat: Added new feature.` → passado, com ponto\n- `WIP` → sem contexto\n\nSe o comando NÃO for git commit: ignore esta verificação e deixe executar normalmente.\nSe for git commit com mensagem válida: ✅ confirme e deixe executar.\nSe for git commit com mensagem inválida: ⛔ BLOQUEIE, explique o problema e sugira a mensagem corrigida."
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "name": "Pre-Write Security Guard",
+    "version": "1.0.0",
+    "description": "Antes de qualquer operação de escrita em arquivo, verifica se o conteúdo não viola hard rules de segurança.",
+    "when": {
+        "type": "preToolUse",
+        "toolTypes": [
+            "write"
+        ]
+    },
+    "then": {
+        "type": "askAgent",
+        "prompt": "Uma operação de escrita está prestes a ser executada. Verifique se o conteúdo:\n\n1. Contém secrets, tokens, API keys ou senhas hardcoded?\n2. Contém padrões inseguros? (SQL concatenado, eval(), innerHTML não sanitizado)\n3. Está sobrescrevendo arquivo crítico de configuração de produção?\n\nSe detectar violação de segurança: BLOQUEIE e explique o problema.\nSe estiver seguro: prossiga sem comentários."
+    }
+}
