@@ -111,3 +111,10 @@ Sugestão:
 ### Próximos passos
 1. [ação concreta com prazo sugerido]
 ```
+
+---
+
+## Escalação
+- TCC envolve implementação de código → **reviewer** para revisão técnica
+- TCC envolve pesquisa de tecnologias → **researcher** para comparativos
+- Formatação e documentação técnica → **doc-writer**

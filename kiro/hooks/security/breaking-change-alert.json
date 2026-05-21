@@ -10,6 +10,6 @@
     },
     "then": {
         "type": "askAgent",
-        "prompt": "Uma operação de escrita está prestes a ocorrer. Se o arquivo define contratos públicos (interfaces TypeScript, tipos exportados, rotas de API, schemas de banco, eventos), verifique:\n\nÉ breaking change se:\n- Remove campo obrigatório de interface/tipo\n- Muda tipo de campo existente\n- Renomeia campo sem alias de compatibilidade\n- Remove endpoint de API\n- Muda assinatura de função exportada\n\nSe for breaking change: ⚠️ ALERTE, identifique consumidores afetados e exija estratégia de migração.\nSe NÃO for breaking change: prossiga sem comentários."
+        "prompt": "Uma operação de escrita está prestes a ocorrer.\n\nPrimeiro: o arquivo sendo escrito define contratos públicos? (interfaces TypeScript, tipos exportados, rotas de API, schemas de banco, eventos de domínio)\nSe NÃO for nenhum desses casos: prossiga sem comentários.\n\nSe SIM, verifique se é breaking change:\n- Remove campo obrigatório de interface/tipo\n- Muda tipo de campo existente\n- Renomeia campo sem alias de compatibilidade\n- Remove endpoint de API\n- Muda assinatura de função exportada\n\nSe for breaking change: ⚠️ ALERTE, identifique consumidores afetados e exija estratégia de migração.\nSe NÃO for breaking change: prossiga sem comentários."
     }
 }

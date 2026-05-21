@@ -2,18 +2,23 @@
 
 Sistema de agentes, skills, hooks e steering para automação com Kiro IDE.
 
+próximas implementações: 
+Claude 
+Qualquer IDE
+
 ---
 
 ## Instalação
 
 ```bash
 # Clone
-git clone https://github.com/seu-usuario/kiro-agents.git
+https://github.com/ljborgess/skills
 
 # Windows (global — todos os projetos)
-xcopy /E /I agents\* "%USERPROFILE%\.kiro\skills\agents\"
-xcopy /E /I skills\* "%USERPROFILE%\.kiro\skills\"
-xcopy /E /I steering\* "%USERPROFILE%\.kiro\steering\"
+mkdir "%USERPROFILE%\.kiro\skills" 2>nul & mkdir "%USERPROFILE%\.kiro\steering" 2>nul
+xcopy /E /I /Y agents\* "%USERPROFILE%\.kiro\skills\agents\"
+xcopy /E /I /Y skills\* "%USERPROFILE%\.kiro\skills\"
+xcopy /E /I /Y steering\* "%USERPROFILE%\.kiro\steering\"
 
 # macOS/Linux (global)
 cp -r agents/ skills/ ~/.kiro/skills/
@@ -155,8 +160,8 @@ SKILLS + HOOKS → regras e automações
 | `global-standards` | auto | — | Padrões de código e segurança |
 | `code-quality` | auto | — | Métricas, naming, commits |
 | `anti-patterns` | auto | — | Padrões proibidos |
-| `domain-glossary` | auto | — | Termos do domínio |
-| `team-conventions` | auto | — | Estrutura, naming, PR |
+| `domain-glossary` | manual | `#domain-glossary` | Termos do domínio |
+| `team-conventions` | manual | `#team-conventions` | Estrutura, naming, PR |
 | `project-context` | manual | `#project-context` | Contexto do projeto |
 | `tech-stack` | manual | `#tech-stack` | Stack com versões |
 
@@ -188,7 +193,7 @@ kiro/
 │   ├── productivity/    → 5 skills
 │   ├── personal/        → tcc-workflow
 │   ├── misc/            → setup-pre-commit
-│   └── skill-creator/
+│   └── skill-creator/   → skill-creator
 ├── hooks/
 │   ├── workflow/        → 5 hooks
 │   ├── quality/         → 5 hooks

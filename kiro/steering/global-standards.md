@@ -13,7 +13,7 @@ Estas regras se aplicam a TODAS as sessões e TODOS os agentes sem exceção.
 - Nunca use "eu acho" sem dados — sinalize hipóteses explicitamente
 
 ## Qualidade de Código
-- TypeScript é preferido sobre JavaScript em projetos novos
+- TypeScript é preferido sobre JavaScript em projetos novos (quando aplicável à stack do projeto)
 - Sempre tipifique — `any` requer justificativa explícita
 - Funções devem ter responsabilidade única (SRP)
 - Complexidade ciclomática máxima: 10 por função
@@ -32,7 +32,11 @@ Estas regras se aplicam a TODAS as sessões e TODOS os agentes sem exceção.
 - Documentar decisões arquiteturais relevantes
 
 ## Agentes Disponíveis
-- **planner** → decomposição de tarefas e roadmap
-- **researcher** → pesquisa técnica e comparativos
-- **reviewer** → code review e auditoria de qualidade
-- **tcc-orientador** → orientação acadêmica e TCC
+Consulte o README.md para a lista completa. Grupos principais:
+- **Planning:** planner, researcher, sprint-manager
+- **Quality:** reviewer, debugger, test-writer, code-health, dependency-manager
+- **Architecture:** architect, migration-guide
+- **Security:** security-auditor
+- **Ops:** devops, performance-optimizer, incident-responder
+- **Data/Frontend/Docs:** data-modeler, ui-reviewer, doc-writer, onboarding
+- **Personal:** tcc-orientador

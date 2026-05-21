@@ -5,11 +5,11 @@
     "when": {
         "type": "preToolUse",
         "toolTypes": [
-            "shell"
+            ".*git commit.*"
         ]
     },
     "then": {
         "type": "askAgent",
-        "prompt": "Um comando shell está prestes a ser executado. Se for um comando `git commit`, valide a mensagem de commit:\n\n**Formato válido (Conventional Commits):**\n```\n<type>(<scope>): <subject>\n\ntype: feat | fix | refactor | test | docs | chore | perf | ci | revert\nscope: módulo afetado (opcional, entre parênteses)\nsubject: imperativo, lowercase, sem ponto final, máximo 72 caracteres\n```\n\n**Exemplos válidos:**\n- `feat(auth): add JWT refresh token rotation`\n- `fix(orders): prevent duplicate order on retry`\n- `refactor: extract validation to separate module`\n- `docs: update API authentication guide`\n\n**Exemplos inválidos:**\n- `update stuff` → sem tipo\n- `Fix bug` → capitalizado, sem tipo\n- `feat: Added new feature.` → passado, com ponto\n- `WIP` → sem contexto\n\nSe o comando NÃO for git commit: ignore esta verificação e deixe executar normalmente.\nSe for git commit com mensagem válida: ✅ confirme e deixe executar.\nSe for git commit com mensagem inválida: ⛔ BLOQUEIE, explique o problema e sugira a mensagem corrigida."
+        "prompt": "Um comando `git commit` está prestes a ser executado. Valide se a mensagem segue o padrão Conventional Commits:\n\n**Formato válido:**\n```\n<type>(<scope>): <subject>\n\ntype: feat | fix | refactor | test | docs | chore | perf | ci | revert\nscope: módulo afetado (opcional, entre parênteses)\nsubject: imperativo, lowercase, sem ponto final, máximo 72 caracteres\n```\n\n**Exemplos válidos:**\n- `feat(auth): add JWT refresh token rotation`\n- `fix(orders): prevent duplicate order on retry`\n- `refactor: extract validation to separate module`\n- `docs: update API authentication guide`\n\n**Exemplos inválidos:**\n- `update stuff` → sem tipo\n- `Fix bug` → capitalizado, sem tipo\n- `feat: Added new feature.` → passado, com ponto\n- `WIP` → sem contexto\n\nSe a mensagem for válida: ✅ confirme e deixe executar.\nSe a mensagem for inválida: ⛔ BLOQUEIE, explique o problema e sugira a mensagem corrigida."
     }
 }
