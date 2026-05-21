@@ -2,6 +2,10 @@
 
 Sistema de agentes, skills, hooks e steering para automação com Kiro IDE.
 
+próximas implementações: 
+Cloude 
+Qualquer IDE
+
 ---
 
 ## Instalação
