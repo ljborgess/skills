@@ -194,6 +194,7 @@ kiro/
 │   ├── personal/        → tcc-workflow
 │   ├── misc/            → setup-pre-commit
 │   └── skill-creator/   → skill-creator
+│   └── caveman/         → caveman mode
 ├── hooks/
 │   ├── workflow/        → 5 hooks
 │   ├── quality/         → 5 hooks
