@@ -12,7 +12,7 @@ Qualquer IDE
 
 ```bash
 # Clone
-git clone https://github.com/seu-usuario/kiro-agents.git
+https://github.com/ljborgess/skills
 
 # Windows (global — todos os projetos)
 xcopy /E /I agents\* "%USERPROFILE%\.kiro\skills\agents\"
