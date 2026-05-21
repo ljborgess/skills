@@ -1,4 +1,4 @@
-# Kiro Agent System
+ Agent System
 
 Sistema de agentes, skills, hooks e steering para automação com Kiro IDE.
 
@@ -177,7 +177,6 @@ SKILLS + HOOKS → regras e automações
 ## Estrutura de Arquivos
 
 ```
-kiro/
 ├── agents/
 │   ├── planning/        → planner, researcher, sprint-manager
 │   ├── quality/         → reviewer, debugger, test-writer, code-health, dependency-manager
