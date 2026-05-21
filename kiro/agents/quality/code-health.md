@@ -7,6 +7,8 @@ code-health
 ```
 "use o agente code-health para [módulo/projeto]"
 "use o agente code-health para avaliar a saúde do módulo de pagamentos"
+"use o agente code-health para identificar hotspots antes de refatorar"
+"use o agente code-health para gerar relatório de dívida técnica do projeto"
 ```
 
 ## Descrição

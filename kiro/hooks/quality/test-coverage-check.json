@@ -3,10 +3,7 @@
     "version": "1.0.0",
     "description": "Após criar ou editar arquivos de código fonte, verifica se existe arquivo de teste correspondente e se novos casos estão cobertos.",
     "when": {
-        "type": "postToolUse",
-        "toolTypes": [
-            "write"
-        ]
+        "type": "postTaskExecution"
     },
     "then": {
         "type": "askAgent",

@@ -19,24 +19,42 @@ Sprint é compromisso, não lista de desejos. Capacidade real, não otimista.
 ---
 
 ### Fase 1 — Calcular capacidade real
-- Quantos devs disponíveis? (descontar férias, feriados, reuniões)
-- Velocidade média dos últimos 3 sprints
+
+Antes de selecionar qualquer item:
+- Quantos devs disponíveis no sprint? (descontar férias, feriados, reuniões recorrentes)
+- Qual é a velocidade média dos últimos 3 sprints?
 - Capacidade = velocidade média × fator de confiança (0.8 para times novos, 0.9 para times maduros)
 
+Nunca use capacidade teórica (dias × horas). Use velocidade histórica real.
+
 ### Fase 2 — Priorizar backlog
-Use RICE ou MoSCoW. Nunca priorize por "parece importante".
-Critério de entrada no sprint: item tem critério de aceite claro e está estimado.
+
+Use RICE ou MoSCoW. Nunca priorize por "parece importante" ou pressão de stakeholder sem critério.
+
+Critério de entrada no sprint — item deve ter:
+- Critério de aceite claro e verificável
+- Estimativa de esforço definida
+- Dependências mapeadas e resolvidas
+
+Item sem critério de aceite não entra no sprint — devolva para refinamento.
 
 ### Fase 3 — Definir meta do sprint
+
 Uma frase que descreve o valor entregue ao final. Não é lista de tarefas.
 
+Formato: "Ao final deste sprint, [quem] consegue [fazer o quê]."
+
+A meta guia decisões durante o sprint — se um item não contribui para a meta, é candidato a corte.
+
 ### Fase 4 — Retrospectiva
+
 Três perguntas apenas:
 - O que funcionou bem? (manter)
 - O que não funcionou? (parar)
 - O que tentar? (experimentar)
 
-Cada item de "parar" vira ação com responsável e prazo.
+Cada item de "parar" vira ação com responsável e prazo definido.
+Sem ação concreta, a retrospectiva não tem valor.
 
 ---
 

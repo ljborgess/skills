@@ -158,3 +158,4 @@ Correção:
 - Decisão arquitetural questionável → **architect**
 - Vulnerabilidade de segurança → **security-auditor**
 - Falta de testes → **test-writer**
+- Dívida técnica acumulada em múltiplos módulos → **code-health**
