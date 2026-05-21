@@ -1,0 +1,91 @@
+{
+    "hooks": {
+        "PreToolUse": [
+            {
+                "matcher": "Write",
+                "hooks": [
+                    {
+                        "type": "prompt",
+                        "prompt": "Uma operação de escrita está prestes a ser executada. Verifique se o conteúdo:\n\n1. Contém secrets, tokens, API keys ou senhas hardcoded?\n2. Contém padrões inseguros? (SQL concatenado, eval(), innerHTML não sanitizado)\n3. Está sobrescrevendo arquivo crítico de configuração de produção?\n\nSe detectar violação de segurança: BLOQUEIE e explique o problema.\nSe estiver seguro: prossiga sem comentários."
+                    },
+                    {
+                        "type": "prompt",
+                        "prompt": "Uma operação de escrita está prestes a ocorrer.\n\nPrimeiro: o arquivo sendo escrito define contratos públicos? (interfaces TypeScript, tipos exportados, rotas de API, schemas de banco, eventos de domínio)\nSe NÃO for nenhum desses casos: prossiga sem comentários.\n\nSe SIM, verifique se é breaking change:\n- Remove campo obrigatório de interface/tipo\n- Muda tipo de campo existente\n- Renomeia campo sem alias de compatibilidade\n- Remove endpoint de API\n- Muda assinatura de função exportada\n\nSe for breaking change: ⚠️ ALERTE, identifique consumidores afetados e exija estratégia de migração.\nSe NÃO for breaking change: prossiga sem comentários."
+                    }
+                ]
+            },
+            {
+                "matcher": "Bash(git commit*)",
+                "hooks": [
+                    {
+                        "type": "prompt",
+                        "prompt": "Um comando `git commit` está prestes a ser executado. Valide se a mensagem segue o padrão Conventional Commits:\n\n**Formato válido:**\n```\n<type>(<scope>): <subject>\n\ntype: feat | fix | refactor | test | docs | chore | perf | ci | revert\nscope: módulo afetado (opcional, entre parênteses)\nsubject: imperativo, lowercase, sem ponto final, máximo 72 caracteres\n```\n\n**Exemplos válidos:**\n- `feat(auth): add JWT refresh token rotation`\n- `fix(orders): prevent duplicate order on retry`\n- `refactor: extract validation to separate module`\n- `docs: update API authentication guide`\n\n**Exemplos inválidos:**\n- `update stuff` → sem tipo\n- `Fix bug` → capitalizado, sem tipo\n- `feat: Added new feature.` → passado, com ponto\n- `WIP` → sem contexto\n\nSe a mensagem for válida: ✅ confirme e deixe executar.\nSe a mensagem for inválida: ⛔ BLOQUEIE, explique o problema e sugira a mensagem corrigida."
+                    }
+                ]
+            }
+        ],
+        "PostToolUse": [
+            {
+                "matcher": "Write",
+                "hooks": [
+                    {
+                        "type": "prompt",
+                        "prompt": "Um arquivo foi salvo. Verifique rapidamente:\n\n1. Há erros de TypeScript no arquivo salvo? (tipos incorretos, imports faltando)\n2. Há violações de ESLint óbvias? (any sem justificativa, console.log esquecido, variáveis não usadas)\n3. Há alguma hard rule violada? (secret hardcoded, error handling ausente)\n\nSe houver problemas: liste-os de forma concisa com a linha e a correção sugerida.\nSe estiver tudo OK: não precisa responder — apenas continue."
+                    },
+                    {
+                        "type": "prompt",
+                        "prompt": "Um arquivo foi salvo. Verifique rapidamente se alguma função no arquivo viola os limites de complexidade:\n\n- Complexidade ciclomática > 10 por função\n- Função com mais de 30 linhas\n- Aninhamento com profundidade > 3\n- Mais de 3 parâmetros em uma função\n\nSe houver violação: informe o nome da função, a métrica violada e sugira como decompor.\nSe estiver dentro dos limites: não responda — continue sem comentários."
+                    },
+                    {
+                        "type": "prompt",
+                        "prompt": "Um arquivo de dependências foi modificado. Audite:\n\n1. CVEs: dependências adicionadas/alteradas têm vulnerabilidades conhecidas?\n2. Licenças: licenças compatíveis com o projeto? (evite GPL em projetos proprietários)\n3. Manutenção: dependências têm manutenção ativa? (último release recente)\n4. Versão pinada: versões estão fixas sem ^ ou ~ em dependências críticas?\n\nSe encontrar problema crítico: sinalize com ⛔ e explique o risco.\nSe tudo OK: ✅ Dependências auditadas."
+                    },
+                    {
+                        "type": "prompt",
+                        "prompt": "Um arquivo de template de variáveis de ambiente foi modificado. Valide a qualidade da documentação:\n\n**Padrão esperado para cada variável:**\n```\n# [Descrição clara do que a variável faz]\n# Tipo: string | number | boolean | url | enum(val1,val2)\n# Obrigatória: sim | não (padrão: valor_padrão)\n# Exemplo: valor_de_exemplo_não_real\nNOME_DA_VARIAVEL=\n```\n\n**Verificações:**\n1. Toda variável tem comentário descritivo?\n2. O tipo está documentado?\n3. Está indicado se é obrigatória?\n4. Há um valor de exemplo (não real, não secret)?\n5. Variáveis de secret têm aviso explícito de não commitar o valor real?\n6. Variáveis novas foram adicionadas ao README na tabela de env vars?\n\nSe faltar documentação: adicione os comentários faltantes seguindo o padrão.\nSe estiver completo: ✅ Variáveis de ambiente documentadas corretamente."
+                    },
+                    {
+                        "type": "prompt",
+                        "prompt": "Um arquivo de configuração arquitetural foi modificado. Avalie se esta mudança requer um ADR (Architecture Decision Record):\n\n**Critérios para criar ADR:**\n- A mudança afeta como o sistema é construído, deployado ou executado?\n- A mudança tem trade-offs que o time precisa entender?\n- A mudança seria difícil de reverter?\n- Um novo dev ficaria confuso sem contexto sobre esta decisão?\n\nSe SIM para qualquer critério:\n1. Crie o arquivo `docs/adr/ADR-[próximo-número]-[título-kebab-case].md`\n2. Use o template do agente `architect` (seção \"Fase 5 — Documentar em ADR\")\n3. Documente: contexto, decisão, alternativas consideradas e consequências\n\nSe NÃO (mudança trivial/rotineira): apenas confirme que não é necessário ADR e explique por quê."
+                    }
+                ]
+            }
+        ],
+        "Stop": [
+            {
+                "hooks": [
+                    {
+                        "type": "prompt",
+                        "prompt": "Um arquivo de código foi criado ou modificado. Verifique cobertura de testes:\n\n1. Existe arquivo de teste correspondente? (ex: user.service.ts → user.service.test.ts)\n2. Novas funções ou branches têm testes cobrindo: happy path, casos de erro, edge cases?\n3. Testes existentes ainda refletem o comportamento atual?\n\nSe faltar cobertura importante: liste o que está faltando e ofereça criar os testes.\nSe for arquivo de config, tipo ou constante: ✅ não precisa de teste.\nSe cobertura estiver OK: não responda."
+                    },
+                    {
+                        "type": "prompt",
+                        "prompt": "A sessão está encerrando. Faça uma varredura rápida de dead code nos arquivos modificados nesta sessão:\n\n1. **Imports não utilizados**: Há imports que foram adicionados mas não são referenciados no arquivo?\n2. **Funções não chamadas**: Há funções criadas que não são chamadas em nenhum lugar?\n3. **Variáveis não usadas**: Há variáveis declaradas mas nunca lidas?\n4. **Exports sem consumidores**: Há exports que não são importados em nenhum outro arquivo do projeto?\n5. **Código comentado**: Há blocos de código comentados que deveriam ser removidos?\n\nPara cada item encontrado:\n- Informe o arquivo e linha\n- Classifique: pode remover com segurança / verificar antes de remover\n\nSe não houver dead code: ✅ Nenhum dead code detectado.\nSe houver: liste de forma concisa e pergunte se deve remover agora."
+                    },
+                    {
+                        "type": "prompt",
+                        "prompt": "Uma tarefa foi concluída. Se ela envolveu código frontend ou queries de banco de dados, verifique o performance budget:\n\n**Frontend — verifique se:**\n- Foram adicionadas novas dependências pesadas? (> 50kb gzipped)\n- Há imports que poderiam ser lazy loaded?\n- Imagens novas têm dimensões definidas e formato otimizado (WebP/AVIF)?\n- Componentes novos têm re-renders desnecessários? (funções inline em props, objetos criados no render)\n- Há operações síncronas pesadas no thread principal?\n\n**Backend/Banco — verifique se:**\n- Queries novas têm índices adequados?\n- Há risco de N+1 nas queries adicionadas?\n- Operações em loop que poderiam ser batch?\n- Chamadas externas síncronas que poderiam ser paralelas (Promise.all)?\n\n**Performance Budget:**\n- Bundle JS total: < 500kb gzipped\n- Nenhuma query sem índice em tabelas > 10k registros\n- Nenhum loop com query dentro\n\nSe houver violação: sinalize com ⚠️ e sugira a otimização.\nSe não for tarefa de frontend/banco: ✅ Performance budget não aplicável a esta tarefa."
+                    },
+                    {
+                        "type": "prompt",
+                        "prompt": "A tarefa foi marcada como concluída. Execute a validação pós-tarefa:\n\n1. Identifique os arquivos modificados nesta tarefa\n2. Execute os testes relacionados aos arquivos modificados\n3. Verifique erros de TypeScript/lint nos arquivos alterados\n4. Confirme que o comportamento esperado está funcionando\n\nSe os testes passarem: ✅ Pós-validação OK.\nSe houver falhas: liste os erros e corrija antes de considerar a tarefa concluída."
+                    },
+                    {
+                        "type": "prompt",
+                        "prompt": "A sessão está encerrando. Gere um sumário estruturado no seguinte formato:\n\n## 📋 Sumário da Sessão\n\n### ✅ O que foi feito\n[Lista dos arquivos criados/modificados e o que cada um faz]\n\n### 🧠 Decisões tomadas\n[Decisões técnicas ou de design relevantes e suas justificativas]\n\n### ⚠️ Pontos de atenção\n[Qualquer coisa incompleta, risco identificado ou dívida técnica gerada]\n\n### 🔜 Próximos passos sugeridos\n[Lista priorizada do que deve ser feito na próxima sessão]\n\nSeja conciso — máximo 20 linhas no total."
+                    }
+                ]
+            }
+        ],
+        "UserPromptSubmit": [
+            {
+                "hooks": [
+                    {
+                        "type": "prompt",
+                        "prompt": "Antes de iniciar esta tarefa, valide:\n\n1. O objetivo está inequivocamente definido?\n2. Os limites do que deve e não deve ser feito estão claros?\n3. Todas as dependências necessárias estão disponíveis?\n4. Como saberemos que a tarefa está completa?\n\nSe qualquer item estiver ambíguo: PARE e sinalize antes de prosseguir.\nSe tudo estiver claro: ✅ Pré-validação OK — iniciando."
+                    }
+                ]
+            }
+        ]
+    }
+}
