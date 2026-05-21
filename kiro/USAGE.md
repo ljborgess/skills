@@ -82,6 +82,7 @@ Sintaxe: `"aplique a skill [nome] nesse código"` ou `"siga a skill [nome] para 
 | `adr-template` | Documentar uma decisão arquitetural |
 | `tcc-workflow` | Qualquer fase do TCC |
 | `setup-pre-commit` | Configurar validações automáticas antes de commits |
+| `caveman-mode` | Reduzir tokens ~75% mantendo precisão técnica — modo ultra-comprimido |
 | `skill-creator` | Criar novas skills seguindo o padrão do sistema |
 
 ---

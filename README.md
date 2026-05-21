@@ -108,7 +108,7 @@ SKILLS + HOOKS → regras e automações
 `hard-rules` `refactor` `code-review-checklist` `architecture-patterns` `api-design` `database-patterns` `testing-strategy` `error-handling` `accessibility` `docker-best-practices` `observability` `ci-cd-patterns`
 
 ### Productivity
-`priorizacao` `output-format` `prompt-engineering` `git-workflow` `adr-template`
+`priorizacao` `output-format` `prompt-engineering` `git-workflow` `adr-template` `caveman-mode`
 
 ### Personal
 `tcc-workflow`
